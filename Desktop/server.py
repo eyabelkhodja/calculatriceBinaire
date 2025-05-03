@@ -1,11 +1,15 @@
 import socket
 import hashlib
 
+# Fonction pour effectuer des opérations binaires
+# Cette fonction prend une opération et deux opérandes en format binaire, effectue l'opération spécifiée et retourne le résultat en format binaire.
 def calculate_operation(op, op1, op2=None):
+    # Convertit les opérandes binaires en entiers
     op1 = int(op1, 2)
     if op2:
         op2 = int(op2, 2)
-
+# Dictionnaire des opérations possibles
+# Les clés représentent les noms des opérations et les valeurs sont les résultats des opérations correspondantes.
     operations = {
         "AND": op1 & op2,
         "OR": op1 | op2,
@@ -14,12 +18,15 @@ def calculate_operation(op, op1, op2=None):
         "RS": op1 >> op2,
         "INVERT": ~op1,
     }
-
-    result = operations.get(op.upper(), "Invalid operation")
+ # Conversion du résultat en binaire avec gestion du signe
+ # Récupère le résultat de l'opération ou retourne une erreur si l'opération est invalide
+    result = operations.get(op.upper(), "Operation Invalide")
     if isinstance(result, int):
         return bin(result) if result >= 0 else f"-0b{bin(abs(result))[2:]}"
     return result
 
+# Fonction pour vérifier l'intégrité des données reçues
+# Cette fonction utilise un checksum pour vérifier si les données ont été corrompues.
 def verify_checksum(data: str) -> tuple[bool, str]:
     try:
         payload, received_checksum = data.rsplit(",", 1)
@@ -27,10 +34,11 @@ def verify_checksum(data: str) -> tuple[bool, str]:
         return calculated_checksum == received_checksum, payload
     except:
         return False, ""
-
+# Création et configuration du socket serveur
+# Configuration pour utiliser UDP (SOCK_DGRAM)
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server_socket.bind((socket.gethostname(), 1234))
-print("✅ Server ready on port 1234")
+print("Serveur opérationnel, en attente de messages sur le port 1234...")
 
 while True:
     try:
@@ -44,7 +52,7 @@ while True:
 
         parts = payload.split(",")
         if len(parts) != 4:
-            raise ValueError("Invalid format, expected 4 fields")
+            raise ValueError("Format Invalide, on doit avoir 4 valeurs")
 
         op, op1, op2, _ = parts
         op2 = op2 if op2 != "" else None
