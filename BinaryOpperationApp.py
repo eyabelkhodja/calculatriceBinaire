@@ -56,12 +56,12 @@ class BinaryOperationApp(ctk.CTk):  # Application pour les opérations binaires
 
         # Vérification de l'opérande 1 (doit être un binaire de 8 bits)
         if not (len(op1) == 8 and set(op1) <= {"0", "1"}):
-            messagebox.showerror("Erreur d'entrée", "L'opérande 1 doit être un binaire de 8 bits.")
+            messagebox.showerror("Erreur d'entrée", "L'opérande 1 doit être un binaire de 8bits.")
             return
 
         # Vérification de l'opérande 2 (doit être un binaire de 8 bits)
         if not (len(op2) == 8 and set(op2) <= {"0", "1"}):
-            messagebox.showerror("Erreur d'entrée", "L'opérande 2 doit être un binaire de 8 bits.")
+            messagebox.showerror("Erreur d'entrée", "L'opérande 2 doit être un binaire de 8bits.")
             return
 
         # Réponse simulée (à remplacer par la logique de socket)
