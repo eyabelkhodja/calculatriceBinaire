@@ -21,8 +21,9 @@ Make sure you have the following installed:
 - Python 3.9+  
 - `customtkinter`  
 - `tkinter` (comes pre-installed with Python)  
-- `hashlib` (standard library)  
+- `hashlib` (standard library)
+  
+---
 
-Install dependencies (if needed):
-```bash
-pip install customtkinter
+## ▶️ Project Overview
+To download the application, visit the executable file **BinaryOpperationApp(2).exe**
